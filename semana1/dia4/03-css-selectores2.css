@@ -1,0 +1,44 @@
+/* Selectores de etiquetas */
+
+
+.titulo_h3{
+    color: blue;
+}
+
+
+
+header {
+  /* Todos las etiquetas dentro de header */
+  background-color: #444;
+}
+
+h1 {
+  /* Todas las etiquetas h1 */
+  color: #eee;
+}
+
+h2 {
+    /* Todas las etiquetas h2 */
+    font-family: sans-serif;
+}
+
+section, aside{
+    /* Todas las etiquetas section & aside */
+    border: 1px solid grey;
+}
+
+
+a {
+    color: crimson;
+}
+
+.enlace_importante{
+    /* Todos los elementos o etiquetas
+    que tengan la clase "enlace_importante" */
+color: teal;
+
+}
+
+.titulo_h3{
+    color: red
+}
