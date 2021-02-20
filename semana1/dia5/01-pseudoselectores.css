@@ -1,30 +1,102 @@
 /* Links no visitados */
-.nav_link:link{
-    color: darkgreen;
+.nav_link:link {
+  color: darkgreen;
 }
-
 
 /* Links visitados */
-.nav_link:visited{
-    color: dodgerblue;
+.nav_link:visited {
+  color: dodgerblue;
 }
-
 
 /* Cuando un elemento es clickado
 (Exactamente cuando está presionado*/
-.nav_link:active{
-    color: yellowgreen;
+.nav_link:active {
+  color: yellowgreen;
 }
 
-.btn_guardar{
-    border: none;
+.btn_guardar {
+  border: none;
+  outline: none;
+  background-color: indigo;
+  color: white;
+  padding: 10px;
+}
+
+
+/* Cuando el mouse pasa sobre el elemento */
+.btn_guardar:hover{
+    transform: translate(0,1px);
+    cursor: pointer;
+}
+
+
+
+.btn_guardar:active {
+  transform: translate(0, 2px) scale(0.96);
+  box-shadow: 0px 2px 10px #555;
+}
+
+input {
     outline: none;
+    border: none;
+    padding: 4px 5px;
+    font-size: 18px;
+    border-bottom: 1px solid #a969d8;
+    margin-left: 10px;
+}
+
+
+    /* Cuando el cursos se encuentra sobre
+    un input */
+input:focus{
+    border-bottom: 1.5px solid #7e04d4;
+}
+
+
+/* De la lista de tr's heramanos que sean
+hijos de un thead, que a su vez sea hijo
+de un elemento con clase .tabla 
+De todos esos tr's el primero */
+.tabla thead tr:nth-child(1){
     background-color: indigo;
     color: white;
-    padding: 10px;
+
 }
 
-.btn_guardar:active{
-    transform: translate(0,2px) scale(0.96);
-    box-shadow: 0px 2px 10px #555;
+
+.tabla tbody tr:nth-child(3){
+    color: tomato;
 }
+
+.tabla tbody tr td:nth-child(5){
+    color:white;
+    background-color: darkslateblue;
+}
+
+.tabla tbody tr:nth-child(odd){
+    background-color: rgb(152, 130, 230);
+}
+
+.tabla tbody tr:nth-child(even){
+    background-color: rgb(118, 74, 177);
+}
+
+
+
+.tabla td:hover{
+    cursor: pointer;
+    background-color: #412641;
+    color: white;
+}
+
+
+
+/* input[type]{ 
+
+}
+
+input[type=password]{
+
+}
+
+*/
