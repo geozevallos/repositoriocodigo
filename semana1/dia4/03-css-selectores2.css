@@ -42,3 +42,57 @@ color: teal;
 .titulo_h3{
     color: red
 }
+
+.boton_navegacion{
+    text-decoration: none;
+    font-family: cursive;
+}
+
+
+
+button.boton_navegacion{
+    /* Todas las etiquetas buttom
+    que tengan la clase "boton_navegacion" */
+    color: royalblue;
+}
+
+.boton_navegacion.activo{
+    box-shadow: #bbb 0px 0px 20px;
+}
+
+#miFooter{
+    background: #ccc;
+}
+
+
+article p{
+/* Todos los párrafo que estén como hijos o
+nietos o bisnietos, etc de un "article" */
+color: #444;
+text-indent: 10px;
+}
+
+
+section > p{
+    /* Todos los parrafos que sean hijos directos,
+    en primer nivel de un section */
+    font-size: 13px;
+    color: #bbb;
+}
+
+.publicidad_imagen + figcaption{
+    /* El figcaption proximo directo que sean 
+    hermanos directos después de un elemento con clase
+    .publicidad_imagen */
+    font-style: italic;
+    font-size: 12px;
+}
+
+
+#miFooter a ~ button{
+    /* Todos los button que sean hermanos
+    siguientes de a y estos, hijos de
+    id #miFooter */
+
+    border-radius: 6px;
+}
