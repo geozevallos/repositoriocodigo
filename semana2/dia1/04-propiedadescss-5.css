@@ -1,0 +1,20 @@
+* {
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+body{
+    background: linear-gradient(#9eb0e2, #11074b);
+    border: 1px solid yellowgreen;
+    /* min-height: ? como minimo mide 100vh (100% la altura del area visible
+    del navegador, sin embargo, si tu contenido exige más altura, puedes aumentar
+    tu medida */
+    min-height: 100vh;
+}
+
+.parrafo{
+    background-color: yellowgreen;
+    max-width: 600px;
+
+}
