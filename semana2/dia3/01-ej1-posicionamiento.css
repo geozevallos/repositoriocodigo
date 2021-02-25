@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.card{
+    width: 400px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 25px 5px 25px 5px;
+    /* Esquina sup. izquierda, sup. derecha,
+    inf. derecha, inf. izquierda */
+    overflow: hidden;
+}
+
+.card img{
+
+}
+
+.card span{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.card__border{
+    position: absolute;
+    border: 1px solid rgba(1100, 1100, 1100, 0.5);
+    border-radius: 25px 5px 25px 5px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    top: 10px;
+    left: 10px;
+}
