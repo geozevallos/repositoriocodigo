@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    box-sizing: content-box;
+    padding: 0;
+}
+
+
+body{
+    min-height: 100vh;
+    display: flex;
+}
+
+section{
+    border: 1px solid  aquamarine;
+}
+
+.sectionLeft,
+.sectionRight{
+    flex: 1;
+}
+
+
+.sectionLeft{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Gap es la distancia que habrá
+    ene l eje principal entre
+    todos los hijos flexibles */
+    gap: 40px;
+}
+
+.sectionRight{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description{
+    max-width: 250px;
+    text-align: justify;
+}
+
+.logo{
+    margin-bottom: 30px;
+}
