@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: aqua;
+}
+
+/* Qué va a suceder  cuando el ancho
+de la pantalla sea menor a 1024px*/
+@media (max-width: 1024px) {
+  body {
+    background-color: red;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    background-color: blueviolet;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    background-color: goldenrod;
+  }
+}
