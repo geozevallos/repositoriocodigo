@@ -1,0 +1,25 @@
+*{margin: 0;
+padding: 0;
+box-sizing: border-box;}
+
+body{
+    height: 100vh;
+    display: flex;
+}
+
+aside{
+    width: 350px;
+    border: 1px solid cadetblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+section{
+    flex: 1;
+    border: 1px solid cadetblue;
+    padding: 120px;
+    overflow-y: scroll;
+}
+
