@@ -15,6 +15,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 32px;
+  background-image: url(./mixtura-amarilla.png);
+  animation-name: bajando;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  background-size: 100%;
+}
+
+@keyframes bajando {
+  0% {
+    background-position: 0px 0px;
+  }
+
+  100% {
+    background-position: 0px 2000px;
+  }
 }
 
 .header h1 {
@@ -95,7 +110,7 @@
 
 .sidebar__nav {
   padding-top: 30px;
-  transition: padding-top 0.3s linear, heigh 0.3s linear;
+  transition: padding-top 0.3s linear, heigh 0.1s linear;
 }
 
 .sidebar__list {
@@ -122,7 +137,23 @@
   transition: font-size 0.3s linear;
 }
 
+.main__container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 32px;
+  align-content: flex-start;
+}
+
+.container__column {
+  width: calc(100% / 3);
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+
 @media (max-width: 768px) {
+  .container__column {
+    width: 50%;
+  }
   .sidebar {
     width: 90px;
   }
@@ -172,6 +203,9 @@
 }
 
 @media (max-width: 480px) {
+  .container__column {
+    width: 100%;
+  }
   .main {
     flex-direction: column;
   }
@@ -211,6 +245,15 @@
   .sidebar__profile {
     padding-top: 10px;
   }
+
+  .sidebar__item {
+    font-size: 0px;
+  }
+
+  .sidebar.open-mobile .sidebar__item {
+    font-size: unset;
+  }
+
   .sidebar.open-mobile .sidebar__nav {
     height: 175px;
     overflow: unset;
