@@ -12,6 +12,8 @@ function qs(selector){
     return document.querySelector(selector);
 }
 
+// Modificar el active del link
+
 
 let lis = qsall(".header__item");
 lis = Array.from(lis);
@@ -24,3 +26,16 @@ lis.forEach((headerItem) => {
         headerItem.classList.add("active")
     }
 })
+
+// Modificar el tema a través del foquito
+let headerTheme = qs(".header__theme");
+let linkTheme = qs("#linkTheme");
+
+headerTheme.onclick = function () {
+    if(linkTheme.getAttribute("href").indexOf("light") >= 0){
+        linkTheme.setAttribute("href", "./01-element3-dark.css");
+    } else {
+        linkTheme.setAttribute("href", "./01-element3-light.css");
+    }
+}
+
