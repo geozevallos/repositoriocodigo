@@ -60,3 +60,22 @@ btnBordeMenor.onclick = function(){
     borde--;
     tabla.setAttribute("border", borde)
 }
+
+let btnMostrarClases = document.querySelector("#btnMostrarClases")
+
+
+
+// Identificando clases
+btnMostrarClases.onclick = function () {
+    //Mostrar las clases
+    console.log(div1.classList);
+    //Averiguamos si un elemento tiene un clase determinada
+    if (div1.classList.contains("circulo")){
+        console.log("Sí tiene la clase círculo");
+    }
+
+    //OTra forma de mostrar clase (No recomendable)
+    //No devuelve el valor
+    console.log(div1.getAttribute("class"));
+}
+

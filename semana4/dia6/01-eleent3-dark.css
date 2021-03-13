@@ -1,0 +1,29 @@
+body {
+    background-color: #303030;
+}
+
+.header {
+    background-color: #ac1b5a;
+    box-shadow: 0px 2px 8px #202020;
+}
+
+.header__link{
+    color: #eee;
+}
+
+.header__item:hover{
+    border-bottom-color: #eee;
+}
+
+.header__item.active{
+    border-bottom-color: #eee;
+}
+
+.header__theme{
+    color: #303030;
+    text-shadow: 0px 0px 20px #303030;
+};
+
+.header__theme:hover{
+    
+}
