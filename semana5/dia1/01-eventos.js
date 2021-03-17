@@ -76,7 +76,26 @@ formulario.onsubmit = (e) => {
   //ejm: <form> </form> actualiza ela pagina con el evento onsubmit
   //ejm:hacer clic derechoi en el viewport abre un menu contextual en el evento contextmenu
   e.preventDefault();
-  console.log("HACIENDO ONSUBMIT");
+  
+// Una manera de validar sería con if para q no se ingresen registros vacios
+
+//Pero podemos hacerlo con regex
+
+// let regexLetras = new RegExp('^[a-zA-Z]+$');
+let regexLetras = new RegExp('^[a-zA-Zñ]{1,5}$');
+if(regexLetras.test(datos.nombre)){
+  if (regexLetras.test(datos.apellido)){
+    console.log("HACIENDO ONSUBMIT");
+  } else {
+    inputApellido.classList.add("error-input")
+    return
+  }
+} else{
+  inputNombre.classList.add("error-input");
+  return;
+}
+
+  
 };
 
 /**
