@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+
+    <!-- Flickity -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
     
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
     <style>
-      .cargando{
+      .cargando {
         position: fixed;
         height: 100vh;
         width: 100vw;
@@ -15,82 +32,192 @@
         z-index: 1000;
         display: flex;
         justify-content: center;
-        align-items: center;}
+        align-items: center;
+      }
+
+      .contenedor-imagen{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carousel-cell img {
+        max-width: 90%;
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px #777;
+      }
+      
+      .carousel-cell{
+        width: 400px
+      }
+
+      .miMapa{
+        height: 600px;
+        width: 900px;
+      }
+
+
     </style>
     <title>Document</title>
-</head>
-<body class="bg-light">
-
-<div id="cargando" class="cargando" hidden>
-  <h4 class="display-3 text-white">Cargando...</h4>
-</div>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" id="formBusqueda">
-        <input class="form-control me-2" type="search" 
-        placeholder="Buscar" aria-label="Search" id="inputBusqueda">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+  </head>
+  <body class="bg-light">
+    <div id="cargando" class="cargando" hidden>
+      <h4 class="display-3 text-white">Cargando...</h4>
     </div>
-  </div>
-</nav>
-  
-<main class="container">
-  <div class="row">
-    <h1 class="display-4">Resultado para <span id="climaCiudad">Ayacucho</span></h1>
-    <div class="col-xxl-3 col-md-6 col-sm-12">
-      <div class="card shadow">
-        <img src="http://placehold.it/150x150" id="climaIcono" class="card-img-top" alt="">
-        <div class="card-body">
-          <h2 class="display-4 text-center" ><span id="climaTemp">32</span>&#8451; </h2>
-          <p class="card-text">
-            <strong>Temp. min.: </strong><span id="climaTempMin">13 </span> &#8451;
-          </p>
-          <p class="card-text">
-            <strong>Temp. máx.: </strong><span id="climaTempMax">33 </span> &#8451;
-          </p>
-          <p class="card-text">
-            <strong>Sensación térmica: </strong><span id="climaSensacion">30 </span> &#8451;
-          </p>
-          <p class="card-text">
-            <strong>Humedad: </strong><span id="climaHumedad">70</span>%
-          </p>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link disabled"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
+                >Disabled</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex" id="formBusqueda">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Buscar"
+              aria-label="Search"
+              id="inputBusqueda"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
         </div>
       </div>
-    </div>
-  </div>
-</main>
+    </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <main class="container">
+      <h2 class="display-6">Pronóstico del tiempo de 5 días cada 3 Horas</h2>
+      
+      
+      <section class="row mb-5 main-carousel" id="sectioncarrusel">
+
+        <!-- main-carousel -->
+<!-- 
+        <div class="card mb-3 mx-1 carousel-cell" style="width: 400px">
+          <div class="row">
+            <div class="col-md-6 contenedor-imagen">
+              <img src="http://placehold.it/150x150" alt="..." />
+            </div>
+            <div class="col-md-6 text-center">
+              <div class="card-body">
+                <h3 class="card-title"><span>30</span>&#8451</h3>
+                <p class="card-text">
+                  <strong>Temp. min.: </strong
+                    ><span id="climaTempMin">13 </span> &#8451;
+                </p>
+                <p class="card-text">
+                  <strong>Temp. máx.: </strong
+                  ><span id="climaTempMax">33 </span> &#8451;
+                </p>
+
+                <p class="card-text">
+                  <h4><span>22/03/2021</span></h4>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>       -->
+
+      </section>
+
+      <div class="row">
+        <h1 class="display-6">
+          Resultado para <span id="climaCiudad">Ayacucho</span>
+        </h1>
+        <div class="col-xxl-3 col-md-6 col-sm-12">
+          <div class="card shadow">
+            <img
+              src="http://placehold.it/150x150"
+              id="climaIcono"
+              class="card-img-top"
+              alt=""
+            />
+            <div class="card-body">
+              <h2 class="display-4 text-center">
+                <span id="climaTemp">32</span>&#8451;
+              </h2>
+              <p class="card-text">
+                <strong>Temp. min.: </strong
+                ><span id="climaTempMin">13 </span> &#8451;
+              </p>
+              <p class="card-text">
+                <strong>Temp. máx.: </strong
+                ><span id="climaTempMax">33 </span> &#8451;
+              </p>
+              <p class="card-text">
+                <strong>Sensación térmica: </strong
+                ><span id="climaSensacion">30 </span> &#8451;
+              </p>
+              <p class="card-text">
+                <strong>Humedad: </strong><span id="climaHumedad">70</span>%
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 miMapa" id="miMapa">
+
+        </div>
+      </div>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- flickity -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="./04-api-climas.js"></script>
-</body>
+  </body>
 </html>
