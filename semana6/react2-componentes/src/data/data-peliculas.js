@@ -42,7 +42,7 @@ export let listaPeliculas = [
     "vote_count": 206
   },
   {
-    "adult": false,
+    "adult": true,
     "backdrop_path": "/fev8UFNFFYsD5q7AcYS8LyTzqwl.jpg",
     "genre_ids": [
       28,
@@ -182,7 +182,7 @@ export let listaPeliculas = [
     "vote_count": 889
   },
   {
-    "adult": false,
+    "adult": true,
     "backdrop_path": "/lOSdUkGQmbAl5JQ3QoHqBZUbZhC.jpg",
     "genre_ids": [
       53,
@@ -221,7 +221,7 @@ export let listaPeliculas = [
     "vote_count": 350
   },
   {
-    "adult": false,
+    "adult": true,
     "backdrop_path": "/vfuzELmhBjBTswXj2Vqxnu5ge4g.jpg",
     "genre_ids": [
       53,
@@ -280,7 +280,7 @@ export let listaPeliculas = [
     "vote_count": 306
   },
   {
-    "adult": false,
+    "adult": true,
     "backdrop_path": "/jeAQdDX9nguP6YOX6QSWKDPkbBo.jpg",
     "genre_ids": [
       14,
@@ -338,7 +338,7 @@ export let listaPeliculas = [
     "vote_count": 0
   },
   {
-    "adult": false,
+    "adult": true,
     "backdrop_path": "/yR27bZPIkNhpGEIP3jKV2EifTgo.jpg",
     "genre_ids": [
       16,
@@ -376,7 +376,7 @@ export let listaPeliculas = [
     "vote_count": 223
   },
   {
-    "adult": false,
+    "adult": true,
     "backdrop_path": "/u5WUCO6irZoq27qbYYrtLUrCGDV.jpg",
     "genre_ids": [
       27,

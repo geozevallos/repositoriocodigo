@@ -1,6 +1,10 @@
 import React from "react";
 
 const Header = () => {
+
+  const autenticado = true;
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -73,16 +77,23 @@ const Header = () => {
               </a>
             </li>
           </ul>
+
+         
           <form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
+
+          {
+            autenticado ? 
+            // O puede ser autenticado === true 
             <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            Cerrar Sesión
+          </button>
+            : 
+            <button className="btn btn-outline-success" type="submit">
+            Iniciar Sesión
+          </button>
+          }
+          
+
           </form>
         </div>
       </div>
