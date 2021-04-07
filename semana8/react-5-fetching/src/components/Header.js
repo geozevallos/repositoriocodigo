@@ -1,21 +1,38 @@
-import React from 'react'
+import React, { useRef } from "react";
 
-const Header = () => {
-    return (
-<header>
-<nav className="navbar navbar-light bg-light">
-  <div className="container-fluid">
-    <a className="navbar-brand">Buscador Noticias</a>
-    <form className="d-flex">
-      <input className="form-control me-2" type="search" placeholder="Busca noticias" aria-label="Search" />
-      <button className="btn btn-outline-success" type="submit">Buscar</button>
-    </form>
-  </div>
-</nav>
-</header>
-            
+const Header = (props) => {
+  let { setBusqueda } = props;
 
-    )
-}
+  const refInputBusqueda = useRef();
+  const handleSubmit = e => {
+    e.preventDefault();
+    let tagBuscado = refInputBusqueda.current.value;
+    if(tagBuscado.trim() !== ""){
+      setBusqueda(tagBuscado.trim())
+    }
+  }
 
-export default Header
+  return (
+    <header>
+      <nav className="navbar navbar-light bg-light">
+        <div className="container-fluid">
+          <a className="navbar-brand">Buscador Noticias</a>
+          <form className="d-flex" onSubmit={handleSubmit}>
+            <input
+              ref={refInputBusqueda}
+              className="form-control me-2"
+              type="search"
+              placeholder="Busca noticias"
+              aria-label="Search"
+            />
+            <button className="btn btn-outline-success" type="submit">
+              Buscar
+            </button>
+          </form>
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;

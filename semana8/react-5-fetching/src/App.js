@@ -1,40 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import Header from './components/Header'
-import Noticias from './components/Noticias'
-import { getNewsByTag } from './servicios/servicios';
+import React, { useEffect, useState } from "react";
+import Header from "./components/Header";
+import Noticias from "./components/Noticias";
+import NoticiasPopulares from "./components/NoticiasPopulares";
+import { getNewsByTag } from "./servicios/servicios";
+
 
 const App = () => {
+  const [noticias, setNoticias] = useState([]);
+  const [busqueda, setBusqueda] = useState("");
+  const [cargando, setCargando] = useState(false)
 
-    const[noticias, setNoticias] = useState([]);
-    const[busqueda, setBusqueda] = useState("");
+  useEffect(() => {
+    if (busqueda === "") {
+      return;
+    }
 
- 
+    setCargando(true);
+    getNewsByTag(busqueda).then((rpta) => {
+      setNoticias(rpta.data.articles);
+      setCargando(false);
+    });
+  }, [busqueda]);
 
-    useEffect(() => {
-        if(busqueda === ""){
-            return;
-        }
-        getNewsByTag(busqueda).then(rpta => {
-            setNoticias(rpta.data.articles)
-        })
-    }, [busqueda]);
-
-
-
-
-
+  return (
+    <>
+      <Header setBusqueda={setBusqueda} />
+      <main className="container">
 
 
 
-    return (
-        <>
-<Header />
-<main className="container">
-    <Noticias/>
+          {
+              cargando ? 
+                  <div className="alert alert-primary mt-5">
+                      <h3>Cargando..</h3>
+                      <hr/>
+                      <p>Cargando resultados</p>
+                  </div>
+               :
+               noticias.length === 0 ? 
+               <div className="alert alert-info mt-5">
+                   <h3>Ups!</h3>
+                   <p>No tenemos noticias para mostrar, intenta buscar algo</p>
+               </div> 
+               :
+              <Noticias noticias={noticias}/>
+          }
+        
+      </main>
+    </>
+  );
+};
 
-</main>
-</>
-    )
-}
-
-export default App
+export default App;
