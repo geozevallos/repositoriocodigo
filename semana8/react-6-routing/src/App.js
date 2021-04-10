@@ -1,14 +1,41 @@
 import React, { useState } from "react";
-import { Route, Link, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Route, Link, Switch, BrowserRouter as Router, NavLink } from "react-router-dom";
 import CarritoPage from "./pages/carrito/CarritoPage";
 import HomePage from "./pages/home/HomePage";
 import ProductoDetailPage from "./pages/productos/ProductoDetailPage";
 import ProductosPage from "./pages/productos/ProductosPage";
 
+//librería de notifiacion
+import 'react-notifications/lib/notifications.css';
+
+
 const App = () => {
   const [carrito, setCarrito] = useState([]);
-  const agregarAlCarrito = (objProducto, cantidad = 1) =>{
-    setCarrito([...carrito, objProducto])
+  
+  
+  const agregarAlCarrito = (objProducto) =>{
+    //1.  Hacer una copia del carrito
+    let carritoTemporal = [...carrito]
+    //2.Buscar en el array si ya existe un producto
+    let posicion = carritoTemporal.findIndex((objProductoCarrito)=> objProductoCarrito.id === objProducto.id);
+    
+    
+    if (posicion >= 0){
+      carritoTemporal[posicion].cantidad++;
+      setCarrito(carritoTemporal);
+    }else{
+      //Agregamos al carrito un nuevo producto
+      carritoTemporal.push({...objProducto, cantidad: 1});
+      setCarrito(carritoTemporal);
+    }
+    
+  }
+
+  const eliminarProducto = id =>{
+    let carritoTemporal = [...carrito];
+    let posicion = carritoTemporal.findIndex((objProducto) => objProducto.id === id)
+    carritoTemporal.splice(posicion, 1);
+    setCarrito(carritoTemporal);
   }
 
   return (
@@ -33,24 +60,26 @@ const App = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link
+                  <NavLink
                     to="/"
-                    className="nav-link active"
-                    aria-current="page"
-                    href="#"
+                    className="nav-link"
+                    activeClassName="active"
+                    exact={true}
                   >
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link to="/productos" className="nav-link">
+                  <NavLink to="/productos" className="nav-link"
+                  activeClassName="active" >
                     Productos
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link to="/carrito" className="nav-link">
+                  <NavLink to="/carrito" className="nav-link"
+                  activeClassName="active">
                     Carrito ({carrito.length})
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -66,7 +95,7 @@ const App = () => {
           <ProductosPage agregarAlCarrito = {agregarAlCarrito}/>
         </Route>
         <Route path="/carrito">
-          <CarritoPage carrito={carrito}/>
+          <CarritoPage carrito={carrito} eliminarProducto={eliminarProducto}/>
         </Route>
         <Route path="/" component={HomePage} />
       </Switch>

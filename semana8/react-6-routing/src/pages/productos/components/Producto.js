@@ -1,5 +1,6 @@
 import React from "react";
 import {useHistory} from "react-router-dom"
+import { NotificationContainer, NotificationManager} from 'react-notifications'
 
 const Producto = ({ objProducto, agregarAlCarrito }) => {
 
@@ -28,9 +29,13 @@ const Producto = ({ objProducto, agregarAlCarrito }) => {
           }>Ver..</button>
           <button className="btn btn-sm btn-secondary"
           onClick = {() => {
+            NotificationManager.success("Agregado!", "Agregado al carrito", 2000)
+
+
             agregarAlCarrito(objProducto);
           }} >Agregar (+1)</button>
         </p>
+        <NotificationContainer/>
       </div>
     </div>
   );
