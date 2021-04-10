@@ -1,6 +1,10 @@
 import React from "react";
+import {useHistory} from "react-router-dom"
 
-const Producto = ({objProducto}) => {
+const Producto = ({ objProducto, agregarAlCarrito }) => {
+
+  const history = useHistory();
+
   return (
     <div className="card">
       <img
@@ -10,12 +14,22 @@ const Producto = ({objProducto}) => {
       />
       <div className="card-body">
         <h5 className="card-title">{objProducto.nombre}</h5>
-        <p className="card-text">
-          {objProducto.descripcion}
+        <p className="card-text">{objProducto.descripcion}</p>
+        <p className="d-flex justify-content-between">
+          <small>Precio: S/. {objProducto.precio}</small>
+          <small>Stock: {objProducto.stock} unidades</small>
         </p>
         <p className="d-flex justify-content-between">
-            <small>Precio: S/. {objProducto.precio}</small>
-            <small>Stock: {objProducto.stock} unidades</small>
+          <button className="btn btn-sm btn-primary"
+          onClick = {
+            () => {
+              history.push(`/productos/${objProducto.id}`)
+            }
+          }>Ver..</button>
+          <button className="btn btn-sm btn-secondary"
+          onClick = {() => {
+            agregarAlCarrito(objProducto);
+          }} >Agregar (+1)</button>
         </p>
       </div>
     </div>

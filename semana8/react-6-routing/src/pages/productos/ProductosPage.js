@@ -1,37 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { getProductos, getProductosByTag } from "../../services/productoService";
+import {
+  getProductos,
+  getProductosByTag,
+} from "../../services/productoService";
 import Productos from "./components/Productos";
 import ProductosFilter from "./components/ProductosFilter";
 
+const ProductosPage = ({agregarAlCarrito}) => {
+  const [productos, setProductos] = useState([]);
+  const [tag, setTag] = useState("");
 
+  const traerProductos = () => {
+    getProductos().then((rpta) => {
+      setProductos(rpta.data);
+    });
+  };
 
-const ProductosPage = () => {
+  useEffect(() => {
+    traerProductos();
+  }, []);
 
-const [productos, setProductos] = useState([]);
-const [tag, setTag] = useState("");
-
-useEffect(() => {
-    getProductos().then(rpta => {
+  useEffect(() => {
+    if (tag !== "") {
+      getProductosByTag(tag).then((rpta) => {
         setProductos(rpta.data);
-    })
-}, []);
-
-useEffect(()=>{
-    if (tag !== "")
-{    getProductosByTag(tag).then(rpta => {
-        setProductos(rpta.data);
-    })}
-}, [tag])
-
+      });
+    }
+  }, [tag]);
 
   return (
     <main className="container-fluid">
       <div className="row">
         <div className="col-md-4">
-            <ProductosFilter/>
+          <ProductosFilter setTag={setTag} />
         </div>
         <div className="col-md-8">
-            <Productos productos = {productos}/>
+          {tag.length > 0 && (
+            <span className="badge bg-primary mb-3" onClick={() => {traerProductos(); setTag("");}}>
+              {tag}&times;
+            </span>
+          )}
+          <Productos productos={productos} agregarAlCarrito={agregarAlCarrito}/>
         </div>
       </div>
     </main>
