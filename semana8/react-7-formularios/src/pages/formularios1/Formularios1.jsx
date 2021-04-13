@@ -6,7 +6,8 @@ const Formularios1 = () => {
 const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
-    distrito: "3"
+    distrito: "3",
+    mensaje: ""
 });
 
 const handleChange = e => {
@@ -59,6 +60,10 @@ return (
                                 <option value="2">San Isidro</option>
                                 <option value="3">San Martín</option>
                             </select>
+                        </div>
+                        <div>
+                            <label htmlFor="" className="form-label">Mensaje:</label>
+                            <textarea className="form-control" name="mensaje" onChange={handleChange} value={formulario.mensaje}></textarea>
                         </div>
                     </form>
                 </div>
