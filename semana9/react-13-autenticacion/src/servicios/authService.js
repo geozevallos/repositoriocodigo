@@ -11,4 +11,28 @@ export const postLogin = async (objLogin) => {
         }
     });
     return rpta;
+};
+
+//null xq no mando nada al body
+export const postVerificar = async (token) => {
+    const rpta = await axios.post(`${URL_BACKEND}/verificar`,
+    null,{
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    } );
+    return rpta;
 }
+
+/**
+ * Peticion con fetch
+ * const peticion = await fetch(`${URL_BACKEND}/verificar`,
+    {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+  const rpta = await peticion.json();
+  return rpta
+ */
