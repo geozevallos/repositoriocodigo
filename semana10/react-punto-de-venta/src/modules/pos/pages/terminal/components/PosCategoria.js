@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import PosContext from "../../../../../context/posContext";
 
-const PosCategoria = () => {
+const PosCategoria = ({ objCategoria }) => {
+  const { objCategoriaGlobal, setObjCategoriaGlobal } = useContext(PosContext);
   return (
-    <div>
-      <li class="active">
-        <img src="/imagenes/plato_blanco.svg" alt="" />
-        <span>Bebidas</span>
-      </li>
-      <li class="active">
-        <img src="/imagenes/plato_blanco.svg" alt="" />
-        <span>Bebidas</span>
-      </li>
-      <li class="active">
-        <img src="/imagenes/plato_blanco.svg" alt="" />
-        <span>Bebidas</span>
-      </li>
-    </div>
+    <li
+      className={
+        objCategoria.categoria_id === objCategoriaGlobal?.categoria_id
+          ? "active"
+          : ""
+      }
+      onClick={() => {
+        setObjCategoriaGlobal({ ...objCategoria });
+      }}
+    >
+      <img src="/imagenes/plato_blanco.svg" alt="" />
+      <span>{objCategoria.categoria_nom}</span>
+    </li>
   );
 };
 

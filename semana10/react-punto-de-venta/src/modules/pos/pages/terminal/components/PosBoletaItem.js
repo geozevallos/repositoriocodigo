@@ -1,45 +1,22 @@
 import React from "react";
 
-const PosBoletaItem = () => {
+const PosBoletaItem = ({objItem}) => {
   return (
-    <div>
+  
       <li class="comanda__item">
         <p class="comanda__nombre">
           <span>
-            <strong>Arroz Chaufa de Pollo</strong>
+            <strong>{objItem.plato_nom}</strong>
           </span>
-          <span>Precio: S/ 35.00</span>
+          <span>Precio S/ {objItem.plato_pre}</span>
         </p>
-        <p class="comanda__cantidad">01</p>
+        <p class="comanda__cantidad">{objItem.plato_cant}</p>
         <p class="comanda__precio">
-          <strong>S/ 35.00</strong>
+          <strong>S/ {objItem.plato_cant * +objItem.plato_pre}</strong>
         </p>
       </li>
-      <li class="comanda__item">
-        <p class="comanda__nombre">
-          <span>
-            <strong>Arroz Chaufa de Pollo</strong>
-          </span>
-          <span>Precio: S/ 35.00</span>
-        </p>
-        <p class="comanda__cantidad">01</p>
-        <p class="comanda__precio">
-          <strong>S/ 35.00</strong>
-        </p>
-      </li>
-      <li class="comanda__item">
-        <p class="comanda__nombre">
-          <span>
-            <strong>Arroz Chaufa de Pollo</strong>
-          </span>
-          <span>Precio: S/ 35.00</span>
-        </p>
-        <p class="comanda__cantidad">01</p>
-        <p class="comanda__precio">
-          <strong>S/ 35.00</strong>
-        </p>
-      </li>
-    </div>
+     
+
   );
 };
 

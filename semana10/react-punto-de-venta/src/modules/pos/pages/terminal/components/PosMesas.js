@@ -1,15 +1,28 @@
-import React from 'react'
-import PosMesa from './PosMesa'
+import React, { useEffect, useState } from "react";
+import { getMesas } from "../../../../../services/mesaService";
+import PosMesa from "./PosMesa";
 
 const PosMesas = () => {
-    return (
-<div class="mesas">
-            <ul class="mesas__lista">
-<PosMesa/>
-            </ul>
-            <div class="mesas__info"></div>
-          </div>
-    )
-}
+  const [mesas, setMesas] = useState([]);
 
-export default PosMesas
+  useEffect(() => {
+    getMesas().then((rpta) => {
+      if (rpta.data.ok) {
+        setMesas(rpta.data.content);
+      }
+    });
+  });
+
+  return (
+    <div class="mesas">
+      <ul class="mesas__lista">
+        {mesas.map((objMesa) => {
+            return <PosMesa key = {objMesa.mesa_id} objMesa={objMesa}/>
+        })}
+      </ul>
+      <div class="mesas__info"></div>
+    </div>
+  );
+};
+
+export default PosMesas;
