@@ -4,6 +4,7 @@ import PosRouter from './modules/pos/PosRouter'
 import "./styles/index.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./styles/invoice.css"
+import AdminRouter from './modules/admin/AdminRouter'
 
 const App = () => {
   return (
@@ -13,6 +14,9 @@ const App = () => {
 
       <Route path="/pos">
         <PosRouter />
+      </Route>
+      <Route path="/admin">
+        <AdminRouter />
       </Route>
 
     </Switch>

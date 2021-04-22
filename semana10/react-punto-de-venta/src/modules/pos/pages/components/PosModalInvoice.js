@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import PosContext from "../../../../context/posContext";
+import ReactToPrint from "react-to-print"
 
 const PosModalInvoice = ({ mostrar, setMostrar }) => {
   const { pedidos, objMesaGlobal } = useContext(PosContext);
+
+  //CReando referencia para imprimir
+  const boletaRef = useRef();
 
   let objPedidoActual = pedidos.find(
     (objPedido) => objPedido.mesa_id === objMesaGlobal.mesa_id
@@ -21,7 +25,8 @@ const PosModalInvoice = ({ mostrar, setMostrar }) => {
         <Modal.Title>Boleta</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div class="container">
+
+        <div class="container" ref={boletaRef}>
           <div class="col-md-12">
             <div class="invoice">
               <div class="invoice-company text-inverse f-w-600">
@@ -147,7 +152,15 @@ const PosModalInvoice = ({ mostrar, setMostrar }) => {
             </div>
           </div>
         </div>
-      </Modal.Body>
+      
+      
+    </Modal.Body>
+    <Modal.Footer>
+        <ReactToPrint 
+        trigger = {() => <button className="btn btn-primary btn-lg">imprimir</button>} 
+        content={() => boletaRef.current }/>
+
+    </Modal.Footer>
     </Modal>
   ) : null;
 };
