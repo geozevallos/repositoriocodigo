@@ -3,7 +3,7 @@ import PosContext from "../../../../../context/posContext";
 
 const PosPlato = ({objPlato}) => {
 
-const {agregarPlatoContext} = useContext(PosContext);
+const {modificarPlatoContext} = useContext(PosContext);
 
 
 
@@ -17,10 +17,13 @@ const {agregarPlatoContext} = useContext(PosContext);
         <h4 className="carta__titulo">{objPlato.plato_nom}</h4>
         <span className="carta__precio">{(+objPlato.plato_pre).toFixed(2)}</span>
         <div className="carta__botones">
-          <button className="boton boton-outline-primary boton-restar">-1</button>
+          <button className="boton boton-outline-primary boton-restar"
+          onClick={() => {
+            modificarPlatoContext({...objPlato}, "restar")
+          }}>-1</button>
           <button className="boton boton-outline-primary boton-sumar"
           onClick={() => {
-            agregarPlatoContext({...objPlato})
+            modificarPlatoContext({...objPlato}, "sumar")
           }}>+1</button>
         </div>
       </div>
