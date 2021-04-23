@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PosContext from "./posContext";
+import { v4 as uuidv4 } from "uuid";
 
 const PosState = (props) => {
   const [objMesaGlobal, setObjMesaGlobal] = useState(null);
@@ -57,12 +58,13 @@ const PosState = (props) => {
           } else {
             //en caso habría una unidad del plato encontrado, borrar dicho plato del arreglo
             objPedido.platos.splice(posPlatoEncontrado, 1);
-            
 
             //Como se borraron platos, es posible que el plato haya sido el único, y ya
             // este vacío por lo que debemos borrar el objeto
-            if(objPedido.platos.length===0){
-              pedidosActuales = pedidosActuales.filter((pedido) => pedido.mesa_id !== objMesaGlobal.mesa_id)
+            if (objPedido.platos.length === 0) {
+              pedidosActuales = pedidosActuales.filter(
+                (pedido) => pedido.mesa_id !== objMesaGlobal.mesa_id
+              );
             }
             setPedidos(pedidosActuales);
           }
@@ -105,9 +107,68 @@ const PosState = (props) => {
     }
   };
 
+  const pagarContext = () => {
+    // Modelo
+
+    // {
+    //   "pedido_fech": "string",
+    //   "pedido_nro": "string",
+    //   "pedido_est": "string",
+    //   "usu_id": 0,
+    //   "mesa_id": 0,
+    //   "pedidoplatos": [
+    //     {
+    //       "plato_id": 0,
+    //       "peditoplato_cant": 0
+    //     }
+    //   ]
+    // }
+
+    let fecha = new Date();
+    let fechaPedido =
+      fecha.getFullYear() +
+      "-" +
+      (fecha.getMonth() + 1) +
+      "-" +
+      fecha.getDate() +
+      " " +
+      fecha.getHours() +
+      ":" +
+      fecha.getMinutes() +
+      ":" +
+      fecha.getSeconds();
+
+    //Encontrar el pediddo del cual quiero hacer el pago
+    let objPedido = pedidos.find(
+      (objPedido) => objMesaGlobal.mesa_id === objPedido.mesa_id
+    );
+
+    //Armar el arreglo de platos para enviar al backend
+
+    let platos = objPedido.platos.map((objPlato) => {
+      return {
+        plato_id: objPlato.plato_id,
+        pedidoplato_cant: objPlato.plato_cant,
+      };
+    });
+
+    let objPedidoFinal = {
+      pedido_fech: fechaPedido,
+      //para generar numero aleatorio
+      pedido_nro: uuidv4(),
+      pedido_est: "pagado",
+      usu_id: 1,
+      mesa_id: objMesaGlobal.mesa_id,
+      pedidoplatos: platos,
+    };
+
+    console.log(objPedidoFinal);
+  };
+
   return (
     <PosContext.Provider
       value={{
+        pagarContext,
         //Esto es igual  objMesaGlobal: objMesaGlobal,
         //objCategoriaGlobal: objCategoriaGlobal
         objMesaGlobal,

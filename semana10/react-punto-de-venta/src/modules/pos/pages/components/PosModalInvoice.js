@@ -4,7 +4,7 @@ import PosContext from "../../../../context/posContext";
 import ReactToPrint from "react-to-print"
 
 const PosModalInvoice = ({ mostrar, setMostrar }) => {
-  const { pedidos, objMesaGlobal } = useContext(PosContext);
+  const { pedidos, objMesaGlobal, pagarContext } = useContext(PosContext);
 
   //CReando referencia para imprimir
   const boletaRef = useRef();
@@ -156,6 +156,9 @@ const PosModalInvoice = ({ mostrar, setMostrar }) => {
       
     </Modal.Body>
     <Modal.Footer>
+      <button className="btn btn-success btn-lg" onClick={pagarContext}>
+        PAGAR
+      </button>
         <ReactToPrint 
         trigger = {() => <button className="btn btn-primary btn-lg">imprimir</button>} 
         content={() => boletaRef.current }/>

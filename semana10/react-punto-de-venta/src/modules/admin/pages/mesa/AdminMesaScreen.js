@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getMesas } from "../../../../services/mesaService";
+import { deleteMesaById, getMesas } from "../../../../services/mesaService";
 import { MDBDataTableV5 } from "mdbreact";
 import AdminModalEditarMesa from "../../components/AdminModalEditarMesa";
 import AdminModalCrearMesa from "../../components/AdminModalCrearMesa";
+import Swal from 'sweetalert2';
+
 
 const AdminMesaScreen = () => {
   const [mostrarModalEditar, setMostrarModalEditar] = useState(false);
@@ -36,6 +38,28 @@ const AdminMesaScreen = () => {
 
   const [objMesaEditar, setObjMesaDitar] = useState(null);
 
+  const eliminarMesa = mesa_id => {
+Swal.fire({
+  title: '¿Seguro que deseas eliminar la mesa?',
+  text: 'Los cambios serán irreversibles',
+  showCancelButton: true,
+  icon: 'error'
+}).then((rpta) => {
+  if (rpta.isConfirmed){
+    deleteMesaById(mesa_id).then(rpta => {
+      if(rpta.data.ok){
+        Swal.fire({
+          text: "Mesa eliminada correctamente",
+          icon: "success",
+          timer: 1500
+        })
+      }
+    })
+    traerMesas();
+  }
+})
+  }
+
   const traerMesas = () => {
     getMesas().then((rpta) => {
       if (rpta.data.ok) {
@@ -55,7 +79,14 @@ const AdminMesaScreen = () => {
                 >
                   Editar
                 </button>
-                <button className="btn btn-danger">Eliminar</button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    eliminarMesa(objMesa.mesa_id)
+                  }}
+                >
+                  Eliminar
+                </button>
               </>
             ),
           };
@@ -80,13 +111,15 @@ const AdminMesaScreen = () => {
           <div className="col">
             <div className="card shadow">
               <div className="card-body">
-                <button className = "btn btn-primary"
-                onClick={() => {
-                  setMostrarModalCrear(true);
-                }}>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setMostrarModalCrear(true);
+                  }}
+                >
                   Crear Mesa
                 </button>
-                <hr/>
+                <hr />
                 {cargando ? (
                   <div className="alert alert-info">Cargando</div>
                 ) : (
