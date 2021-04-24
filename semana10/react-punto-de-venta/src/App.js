@@ -1,28 +1,36 @@
-import React from 'react'
-import {Route, Switch, BrowserRouter as Router} from 'react-router-dom'
-import PosRouter from './modules/pos/PosRouter'
-import "./styles/index.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./styles/invoice.css"
-import AdminRouter from './modules/admin/AdminRouter'
+import React from "react";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import PosRouter from "./modules/pos/PosRouter";
+import "./styles/index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/invoice.css";
+import "./styles/login.css";
+import AdminRouter from "./modules/admin/AdminRouter";
+import AuthRouter from "./modules/auth/AuthRouter";
+import AuthState from "./context/authState";
+import PrivateRoute from "./PrivateRoute";
 
 const App = () => {
   return (
     <Router>
+    <AuthState>
+      
+        <Switch>
+          <PrivateRoute path="/pos">
+            <PosRouter />
+          </PrivateRoute>
+          <PrivateRoute path="/admin">
+            <AdminRouter />
+          </PrivateRoute>
 
-    <Switch>
+          <Route path="/auth">
+            <AuthRouter />
+          </Route>
+        </Switch>
+  
+    </AuthState>
+    </Router>
+  );
+};
 
-      <Route path="/pos">
-        <PosRouter />
-      </Route>
-      <Route path="/admin">
-        <AdminRouter />
-      </Route>
-
-    </Switch>
-
-  </Router>
-  )
-}
-
-export default App
+export default App;
