@@ -13,7 +13,7 @@ const PosModalInvoice = ({ mostrar, setMostrar }) => {
     (objPedido) => objPedido.mesa_id === objMesaGlobal.mesa_id
   );
 
-  return objPedidoActual ? (
+  return( objPedidoActual ? (
     <Modal
       show={mostrar}
       onHide={() => {
@@ -93,7 +93,7 @@ const PosModalInvoice = ({ mostrar, setMostrar }) => {
                             <td class="text-center">{objPlato.plato_nom}</td>
                             <td class="text-right">S/{objPlato.plato_pre}</td>
                             <td class="text-right">
-                              S/{+objPlato.plato_cant * +objPlato.plato_cant}
+                              S/{+objPlato.plato_pre * +objPlato.plato_cant}
                             </td>
                           </tr>
                         );
@@ -156,7 +156,14 @@ const PosModalInvoice = ({ mostrar, setMostrar }) => {
       
     </Modal.Body>
     <Modal.Footer>
-      <button className="btn btn-success btn-lg" onClick={pagarContext}>
+      <button className="btn btn-success btn-lg" 
+      onClick={
+        () => {pagarContext().then(rpta => {
+          if(rpta) {
+            setMostrar(false);
+          }
+        })}
+        }>
         PAGAR
       </button>
         <ReactToPrint 
@@ -165,7 +172,8 @@ const PosModalInvoice = ({ mostrar, setMostrar }) => {
 
     </Modal.Footer>
     </Modal>
-  ) : null;
+  ) : null
+  )
 };
 
 export default PosModalInvoice;

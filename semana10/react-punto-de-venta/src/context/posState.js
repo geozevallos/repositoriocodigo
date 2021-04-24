@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PosContext from "./posContext";
 import { v4 as uuidv4 } from "uuid";
+import { postPedido } from "../services/pedidoService";
 
 const PosState = (props) => {
   const [objMesaGlobal, setObjMesaGlobal] = useState(null);
@@ -107,7 +108,7 @@ const PosState = (props) => {
     }
   };
 
-  const pagarContext = () => {
+  const pagarContext = async () => {
     // Modelo
 
     // {
@@ -140,8 +141,7 @@ const PosState = (props) => {
 
     //Encontrar el pediddo del cual quiero hacer el pago
     let objPedido = pedidos.find(
-      (objPedido) => objMesaGlobal.mesa_id === objPedido.mesa_id
-    );
+      (objPedido) => objMesaGlobal.mesa_id === objPedido.mesa_id);
 
     //Armar el arreglo de platos para enviar al backend
 
@@ -157,13 +157,25 @@ const PosState = (props) => {
       //para generar numero aleatorio
       pedido_nro: uuidv4(),
       pedido_est: "pagado",
-      usu_id: 1,
+      usu_id: 2,
       mesa_id: objMesaGlobal.mesa_id,
       pedidoplatos: platos,
     };
 
     console.log(objPedidoFinal);
+
+    const rpta = await postPedido(objPedidoFinal)
+      if(rpta.data.ok){
+        //borrar el pedido de la mesa actual
+        let pedidosRestantes = pedidos.filter(objPedido => objPedido.mesa_id !== objMesaGlobal.mesa_id);
+        setPedidos([...pedidosRestantes])
+        setObjMesaGlobal(null)
+        return true; 
+      };
   };
+
+
+
 
   return (
     <PosContext.Provider

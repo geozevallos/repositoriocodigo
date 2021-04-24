@@ -45,7 +45,7 @@ const PosBoleta = () => {
             return <PosBoletaItem key={objItem.plato_id} objItem={objItem} />;
           })}
         </ul>
-        <button class="boton boton-success boton-block"
+        <button className="boton boton-success boton-block"
         onClick={
           () => {
             setMostrar(true)
