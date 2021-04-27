@@ -20,6 +20,7 @@ export const authReducer = (stateAntiguo, payload) => {
       token: null,
       usu_nom: null,
       usu_id: null,
+      usu_tipo: null
     };
   }
 };

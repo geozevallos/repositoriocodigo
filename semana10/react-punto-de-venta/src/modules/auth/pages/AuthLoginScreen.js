@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../../context/authContext";
 import { postLogin } from "../../../services/authService";
+import {withRouter} from "react-router-dom"
 
-const AuthLoginScreen = () => {
+const AuthLoginScreen = ({history}) => {
   const [formulario, setFormulario] = useState({
     correo: "",
     password: "",
   });
+
+
 
   const {iniciarSesionContext}= useContext(AuthContext);
 
@@ -22,6 +25,16 @@ const AuthLoginScreen = () => {
     postLogin(formulario).then((rpta) => {
       if(rpta.data.ok){
           iniciarSesionContext(rpta.data.token);
+          //Redireccionar acá al admin o punto de venta
+          let {token} = rpta.data;
+          let payloadString = token.split(".")[1];
+          let payloadDecoded = atob(payloadString);
+          let payloadJSON = JSON.parse(payloadDecoded);
+          if(payloadJSON.usu_tipo === "admin"){
+            history.push("/admin")
+          } else {
+            history.push("/pos/terminal")
+          }
       }
     });
   };
@@ -58,4 +71,4 @@ const AuthLoginScreen = () => {
   );
 };
 
-export default AuthLoginScreen;
+export default withRouter(AuthLoginScreen);

@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PosContext from "./posContext";
 import { v4 as uuidv4 } from "uuid";
 import { postPedido } from "../services/pedidoService";
+import AuthContext from "./authContext";
 
 const PosState = (props) => {
   const [objMesaGlobal, setObjMesaGlobal] = useState(null);
   const [objCategoriaGlobal, setObjCategoriaGlobal] = useState(null);
   const [pedidos, setPedidos] = useState([]);
+
+  const {usu_id} = useContext(AuthContext);
 
   const modificarPlatoContext = (objPlato, accion) => {
     //Obtener una copia del estado de pedidos
@@ -157,7 +160,7 @@ const PosState = (props) => {
       //para generar numero aleatorio
       pedido_nro: uuidv4(),
       pedido_est: "pagado",
-      usu_id: 2,
+      usu_id: usu_id,
       mesa_id: objMesaGlobal.mesa_id,
       pedidoplatos: platos,
     };

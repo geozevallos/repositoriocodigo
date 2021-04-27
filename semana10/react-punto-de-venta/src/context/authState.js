@@ -10,6 +10,7 @@ const initialState = {
   token: null,
   usu_nom: null,
   usu_id: null,
+  usu_tipo: null
 };
 
 const AuthState = (props) => {
@@ -34,6 +35,7 @@ const AuthState = (props) => {
         token: token,
         usu_nom: payloadJson.usu_nom,
         usu_id: payloadJson.usu_id,
+        usu_tipo: payloadJson.usu_tipo
       },
     });
 
@@ -78,13 +80,15 @@ useEffect(() => {
     });
     //props.history.replace("ruta"): similar al push, pero no deja historial
     //de las paginas visitadas anteriormente para no hacer un atrás
-    props.history.replace("/auth/login")
+    
+    //props.history.replace("/auth/login")
   };
 
   return (
     <AuthContext.Provider
       value={{
         iniciarSesionContext,
+        cerrarSesion,
 
         //Compartiendo el state para usarlo en el private route
         ...state

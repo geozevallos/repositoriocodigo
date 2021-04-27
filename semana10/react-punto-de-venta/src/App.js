@@ -9,6 +9,7 @@ import AdminRouter from "./modules/admin/AdminRouter";
 import AuthRouter from "./modules/auth/AuthRouter";
 import AuthState from "./context/authState";
 import PrivateRoute from "./PrivateRoute";
+import GuestRouter from "./modules/guest/GuestRouter";
 
 const App = () => {
   return (
@@ -26,6 +27,12 @@ const App = () => {
           <Route path="/auth">
             <AuthRouter />
           </Route>
+          <Route path="/" exact>
+            <GuestRouter />
+          </Route>
+
+
+
         </Switch>
   
     </AuthState>

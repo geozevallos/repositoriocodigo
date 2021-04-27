@@ -5,21 +5,26 @@ import AuthContext from './context/authContext'
 const PrivateRoute = (props) => {
 
 console.log(props.path);
-    const {autenticado, cargando} = useContext(AuthContext);
+    const {autenticado, cargando, usu_tipo} = useContext(AuthContext);
 
 
     return (
-
-        cargando ? 
-        <div>
+        cargando ?
+          <div>
             Cargando joven...
-        </div> :
-        autenticado ? 
-        <Route path={props.path}>
-            {props.children}
-        </Route> :
-        <Redirect to={"/"} />
-    )
+          </div> :
+          autenticado ?
+            usu_tipo === "admin" && props.path.startsWith("/admin") ||
+              usu_tipo === "ventas" && props.path.startsWith("/pos") ?
+              <Route path={props.path} >
+                {props.children}
+              </Route> :
+              < Redirect to={"/"} />
+            :
+            <Redirect to={"/"} />
+      )
 }
 
 export default PrivateRoute
+
+
