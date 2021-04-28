@@ -1,5 +1,9 @@
 import React from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Route, 
+  Switch, 
+  //BrowserRouter as Router
+HashRouter as Router } 
+  from "react-router-dom";
 import PosRouter from "./modules/pos/PosRouter";
 import "./styles/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,8 +18,7 @@ import GuestRouter from "./modules/guest/GuestRouter";
 const App = () => {
   return (
     <Router>
-    <AuthState>
-      
+      <AuthState>
         <Switch>
           <PrivateRoute path="/pos">
             <PosRouter />
@@ -30,12 +33,8 @@ const App = () => {
           <Route path="/" exact>
             <GuestRouter />
           </Route>
-
-
-
         </Switch>
-  
-    </AuthState>
+      </AuthState>
     </Router>
   );
 };

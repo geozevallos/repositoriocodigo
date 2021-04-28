@@ -1,68 +1,72 @@
 import React, { useEffect, useState } from "react";
 import { MDBDataTableV5 } from "mdbreact";
 import { getPlatos } from "../../../../services/platoService";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 //import {withRouter} from 'react-router-dom'
 
 const platosInicial = {
-    columns: [
-      {
-        label: "#",
-        field: "posicion",
-      },
-      {
-        label: "Id",
-        field: "plato_id",
-      },
-      {
-        label: "Nombre",
-        field: "plato_nom",
-      },
-      {
-        label: "Imagen",
-        field: "plato_img",
-      },
-      {
-        label: "Precio",
-        field: "plato_pre",
-      },
-      {
-        label: "Categoria",
-        field: "categoria_nom",
-      },
-    ],
-    rows: [],
-  };
-
-
+  columns: [
+    {
+      label: "#",
+      field: "posicion",
+    },
+    {
+      label: "Id",
+      field: "plato_id",
+    },
+    {
+      label: "Nombre",
+      field: "plato_nom",
+    },
+    {
+      label: "Imagen",
+      field: "plato_img",
+    },
+    {
+      label: "Precio",
+      field: "plato_pre",
+    },
+    {
+      label: "Categoria",
+      field: "categoria_nom",
+    },
+  ],
+  rows: [],
+};
 
 const AdminPlatoScreen = (props) => {
- 
-
   const [cargando, setCargando] = useState(true);
   const [platos, setPlatos] = useState(platosInicial);
 
-
   useEffect(() => {
-      getPlatos().then(rpta => {
-          if(rpta.data.ok) {
-              setPlatos({
-                  ...platosInicial,
-                  rows: rpta.data.content.map((objPlato, i) => {
-                      return{
-                          posicion: i+1,
-                          plato_id: objPlato.plato_id,
-                          plato_nom: objPlato.plato_nom,
-                          plato_img: <img src={objPlato.plato_img} width="100"/>,
-                          plato_pre: `S/ ${(+objPlato.plato_pre).toFixed(2)}`,
-                          categoria_nom: objPlato.Categorium?.categoria_nom || "Sin Categoría"
-                      }
-                  })
-              })
-              setCargando(false)
-          }
-      })
+    let mounted = true;
+
+    getPlatos().then((rpta) => {
+      if (rpta.data.ok) {
+        if (mounted) {
+          setPlatos({
+            ...platosInicial,
+            rows: rpta.data.content.map((objPlato, i) => {
+              return {
+                posicion: i + 1,
+                plato_id: objPlato.plato_id,
+                plato_nom: objPlato.plato_nom,
+                plato_img: <img src={objPlato.plato_img} width="100" />,
+                plato_pre: `S/ ${(+objPlato.plato_pre).toFixed(2)}`,
+                categoria_nom:
+                  objPlato.Categorium?.categoria_nom || "Sin Categoría",
+              };
+            }),
+          });
+          setCargando(false);
+        }
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
